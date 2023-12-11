@@ -14,8 +14,7 @@ export default function Login() {
     const {userData,setUserData}=useContext(AuthContext)
     const [request, response, promptAsync] = Google.useAuthRequest({
         androidClientId: '55959786226-e9frfu2d60hu3lt653blch82e4rhjsnp.apps.googleusercontent.com',
-        expoClientId:'55959786226-llk648p590tvtaoklnv4o89mtjtenecr.apps.googleusercontent.com'
-       
+        expoClientId:'55959786226-llk648p590tvtaoklnv4o89mtjtenecr.apps.googleusercontent.com'       
       });
 
       useEffect(()=>{
@@ -59,7 +58,7 @@ export default function Login() {
                 <Text style={{color:Colors.white}}>Sign In with Google</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>setUserData({
-              name:'Rahul Sanap',
+              name:'DQHAI',
               picture:'https://cdn3d.iconscout.com/3d/premium/thumb/male-customer-call-service-portrait-6760890-5600697.png?f=webp',
               email:'rahul@gmail.com',
               id:1
