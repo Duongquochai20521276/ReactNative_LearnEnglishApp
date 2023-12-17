@@ -3,9 +3,23 @@ import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
+import { Picker } from '@react-native-picker/picker';
+
+const languageOptions = [
+  { label: 'Tiếng Việt', value: 'vi' },
+  { label: 'English', value: 'en' },
+  { label: 'Español', value: 'es' },
+  { label: 'Français', value: 'fr' },
+  { label: 'Deutsch', value: 'de' },
+  { label: '中文', value: 'zh-Hans' },
+  // Thêm các ngôn ngữ khác vào đây
+];
+
 const TranslateApp = () => {
   const [inputText, setInputText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
+  const [fromLanguage, setFromLanguage] = useState('vi');
+  const [toLanguage, setToLanguage] = useState('en');
 
   const handleTranslate = async () => {
     const key = '67dc4e69113042088b819cb01b9d9b8f';
@@ -30,8 +44,8 @@ const TranslateApp = () => {
           },
           params: {
             'api-version': '3.0',
-            'from': 'vi',
-            'to': 'en',
+            'from': fromLanguage,
+            'to': toLanguage,
           },
           responseType: 'json',
         }
@@ -63,6 +77,30 @@ const TranslateApp = () => {
         onChangeText={(text) => setInputText(text)}
         placeholder="Nhập văn bản cần dịch"
       />
+      <View style={styles.languagePicker}>
+        <Picker
+          selectedValue={fromLanguage}
+          onValueChange={(itemValue) => setFromLanguage(itemValue)}
+          itemStyle={styles.pickerItem} // Đặt màu chữ cho Picker.Item
+          style={styles.picker}
+        >
+          {languageOptions.map((lang) => (
+            <Picker.Item key={lang.value} label={lang.label} value={lang.value} />
+          ))}
+        </Picker>
+      </View>
+      <View style={styles.languagePicker}>
+        <Picker
+          selectedValue={toLanguage}
+          onValueChange={(itemValue) => setToLanguage(itemValue)}
+          itemStyle={styles.pickerItem} // Đặt màu chữ cho Picker.Item
+          style={styles.picker}
+        >
+          {languageOptions.map((lang) => (
+            <Picker.Item key={lang.value} label={lang.label} value={lang.value} />
+          ))}
+        </Picker>
+      </View>
       <Button title="Dịch" onPress={handleTranslate} />
       {translatedText !== '' && <Text style={styles.result}>Dịch: {translatedText}</Text>}
     </View>
@@ -77,12 +115,24 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   input: {
-    height: 40,
+    height: 100,
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 16,
     paddingHorizontal: 8,
     width: '100%',
+  },
+  languagePicker: {
+    height: 40,
+    width: '100%', // Điều chỉnh chiều rộng nếu cần thiết
+    marginBottom: 16,
+    backgroundColor: '', // Đặt màu nền của Picker
+  },
+  picker: {
+    color: 'blue', // Đặt màu chữ
+  },
+  pickerItem: {
+    color: 'black', // Đặt màu chữ cho Picker.Item
   },
   result: {
     marginTop: 16,
