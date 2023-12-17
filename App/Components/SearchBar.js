@@ -11,6 +11,7 @@ const SearchBar = () => {
   const [error, setError] = useState(null);
   const [sound, setSound] = useState();
   const [showFullContent, setShowFullContent] = useState(false);
+  const [searchClicked, setSearchClicked] = useState(false);
 
   const handleSearch = async () => {
     try {
@@ -19,10 +20,12 @@ const SearchBar = () => {
 
       setWordData(wordData);
       setError(null);
+      setSearchClicked(true);
     } catch (error) {
-      console.error('Error sending API request:', error.message);
-      setError('No results found for the given word.');
+      console.error('Lỗi khi gửi yêu cầu API:', error.message);
+      setError('Không tìm thấy kết quả cho từ đã cho.');
       setWordData(null);
+      setSearchClicked(true);
     }
   };
 
@@ -34,12 +37,11 @@ const SearchBar = () => {
       );
       setSound(sound);
 
-      // Clean up the sound object on unmount
       return () => {
         sound.unloadAsync();
       };
     } catch (error) {
-      console.error('Error loading audio', error);
+      console.error('Lỗi khi tải âm thanh', error);
     }
   };
 
@@ -52,30 +54,30 @@ const SearchBar = () => {
   }, [sound]);
 
   return (
-    
     <ScrollView
       contentContainerStyle={styles.container}
       style={[styles.scrollView, { maxHeight: showFullContent ? '100%' : 400 }]}
     >
       <View style={styles.input}>
-      <TextInput
-        placeholder="Search"
-        value={keyword}
-        onChangeText={(text) => setKeyword(text)}
-        style={styles.input}
-      />   
-      <TouchableOpacity onPress={handleSearch} style={styles.searchButton}>
-        <Ionicons name="md-search" size={24} color={Colors.white} />
-      </TouchableOpacity>
+        <TextInput
+          placeholder="Tìm kiếm"
+          value={keyword}
+          onChangeText={(text) => setKeyword(text)}
+          style={styles.input}
+        />
+        <TouchableOpacity onPress={handleSearch} style={styles.searchButton}>
+          <Ionicons name="md-search" size={24} color={Colors.white} />
+        </TouchableOpacity>
       </View>
-      
-      
-      
-      <TouchableOpacity onPress={() => setShowFullContent(!showFullContent)}>
-            <Text style={styles.showFullContentButton}>
-              {showFullContent ? 'Show Less' : 'Show More'}
-            </Text>
-      </TouchableOpacity>
+
+      {searchClicked && (
+        <TouchableOpacity onPress={() => setShowFullContent(!showFullContent)}>
+          <Text style={styles.showFullContentButton}>
+            {showFullContent ? 'Hiển thị ít hơn' : 'Hiển thị thêm'}
+          </Text>
+        </TouchableOpacity>
+      )}
+
       {error && <Text style={styles.errorText}>{error}</Text>}
 
       {wordData && (
@@ -110,7 +112,6 @@ const SearchBar = () => {
               ))}
             </View>
           ))}
-
         </View>
       )}
     </ScrollView>
@@ -118,16 +119,13 @@ const SearchBar = () => {
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    flexGrow: 1,
-  },
   container: {
     backgroundColor: Colors.background,
     padding: 16,
     alignItems: 'center',
   },
-  icon: {
-    marginRight: 10,
+  scrollView: {
+    flexGrow: 1,
   },
   input: {
     flex: 1,
@@ -136,7 +134,7 @@ const styles = StyleSheet.create({
     padding: 5,
     marginRight: 5,
     flexDirection: 'row',
-  alignItems: 'center',
+    alignItems: 'center',
   },
   searchButton: {
     backgroundColor: Colors.primary,
