@@ -12,7 +12,6 @@ const languageOptions = [
   { label: 'Français', value: 'fr' },
   { label: 'Deutsch', value: 'de' },
   { label: '中文', value: 'zh-Hans' },
-  // Thêm các ngôn ngữ khác vào đây
 ];
 
 const TranslateApp = () => {

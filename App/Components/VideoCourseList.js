@@ -1,35 +1,27 @@
-import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import GlobalApi from '../Shared/GlobalApi';
+import { View, Text, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 export default function VideoCourseList() {
-  const [videoList, setVideoList] = useState([]);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    getVideoCourse();
-  }, []);
-
-  const getVideoCourse = async () => {
-    try {
-      const resp = (await GlobalApi.getVideoCourse()).data;
-
-      // Check if resp.data is defined
-      const result = resp.data ? resp.data.map((item) => ({
-        id: item.id,
-        name: item.attributes.title,
-        description: item.attributes.description,
-        image: item.attributes.image.data.attributes.url,
-        Topic: item.attributes.VideoTopic,
-      })) : [];
-
-      setVideoList(result);
-    } catch (error) {
-      console.error("Error fetching video course:", error);
-      // Handle error appropriately, e.g., show an error message to the user
-    }
-  };
+  const videoList = [
+    {
+      id: 1,
+      name: 'Video 1',
+      description: 'Luyện nghe tiếng Anh giao tiếp cơ bản',
+      videoUrl: 'https://www.youtube.com/watch?v=H2x5Y65SO9w&list=PLUwC1OA3ls0ExHR7reLzrkRQthF3I0O23',
+      backgroundImage: require('./../Assets/Images/400cau.png'), // Use require for local images
+    },
+    {
+      id: 2,
+      name: 'Video 2',
+      description: '400 câu tiếng Anh thông dụng',
+      videoUrl: 'https://www.youtube.com/watch?v=xXdgrKexnHI&list=PLUwC1OA3ls0ExHR7reLzrkRQthF3I0O23&index=2',
+      backgroundImage: require('./../Assets/Images/400cau.png'),
+    },
+    // Add more videos as needed
+  ];
 
   const onPressCourse = (course) => {
     navigation.navigate('course-detail', {
@@ -49,15 +41,22 @@ export default function VideoCourseList() {
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => onPressCourse(item)}>
-            <Image
-              source={{ uri: item.image }}
+            <ImageBackground
+              source={item.backgroundImage}
               style={{
                 width: 210,
                 height: 120,
                 marginRight: 10,
                 borderRadius: 7,
               }}
-            />
+              imageStyle={{ borderRadius: 7 }}
+            >
+              {/* You can add additional UI components here, such as text overlay */}
+              <View style={{ flex: 1, justifyContent: 'flex-end', padding: 10 }}>
+                <Text style={{ color: 'black', fontWeight: 'bold' }}>{item.name}</Text>
+                <Text style={{ color: 'white' }}>{item.description}</Text>
+              </View>
+            </ImageBackground>
           </TouchableOpacity>
         )}
       />

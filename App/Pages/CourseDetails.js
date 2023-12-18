@@ -34,10 +34,7 @@ export default function CourseDetails() {
           setUserProgress(result);
         }
       })
-    }
-   
-
- 
+    } 
   return (
     <View style={{padding:20,paddingTop:50}}>
         <TouchableOpacity onPress={()=>navigation.goBack()}>
