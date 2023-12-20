@@ -50,7 +50,7 @@ export default SignUp=({navigation}) =>{
                         id:data.id
                      })
                 } catch (e) {
-                    Alert.alert('Loi luu token: ',e)
+                    Alert.alert('Loi luu token: ',e.message)
                 }
               })
             

@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet,TextInput,KeyboardAvoidingView} from 'react-native'
+import { View, Text, Image, StyleSheet,TextInput,KeyboardAvoidingView,Alert} from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import Colors from '../Shared/Colors'
@@ -14,6 +14,8 @@ export default function Login({navigation}) {
     const [accessToken,setAccessToken]=useState();
     const [userInfo,setUserInfo]=useState();
     const {userData,setUserData,setisLogin}=useContext(AuthContext)
+    const [email,setemail]=useState("")
+    const[password,setpassword]=useState('')
     // const [request, response, promptAsync] = Google.useAuthRequest({
     //     androidClientId: '55959786226-e9frfu2d60hu3lt653blch82e4rhjsnp.apps.googleusercontent.com',
     //     expoClientId:'55959786226-llk648p590tvtaoklnv4o89mtjtenecr.apps.googleusercontent.com'       
@@ -47,6 +49,41 @@ export default function Login({navigation}) {
     //       }
     //   }
       const [showPassword,setshowPassword]=useState(false)
+      function validateEmail(email) {
+            var regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+            return regex.test(email);
+        }
+      const options = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: email, password: password})
+        };
+      function logIn() {
+        if(!email||!password) {
+            Alert.alert('Notification!','User name or password is empty!')
+        }else if(!validateEmail(email)) {
+            Alert.alert('Notification!','The email is incorrect!')
+        } else{
+            fetch("http://192.168.2.46:3000/signin",options)
+              .then(res=>res.json())
+              .then(async data=>{
+                console.log(data)
+                try{
+                    await AsyncStorage.setItem('token',data.token)
+                    Alert.alert('Dang nhap thanh cong:','Chao mung ban quay tro lai!')
+                    setUserData({
+                        name:data.username,
+                        picture:'https://cdn3d.iconscout.com/3d/premium/thumb/male-customer-call-service-portrait-6760890-5600697.png?f=webp',
+                        email:email,
+                        id:data.id
+                     })
+                } catch (e) {
+                    Alert.alert('Loi luu token: ',e.message)
+                }
+                setisLogin(true)
+              })
+        }
+      }
   return (
     <KeyboardAvoidingView behavior='position'>
         
@@ -59,8 +96,12 @@ export default function Login({navigation}) {
                 <Text style={styles.label}>Email</Text>
                 <TextInput
                 style={styles.input}
+                value={email}
                 placeholder='Enter your email'
                 keyboardType='email-address'
+                onChangeText={(text)=>{
+                    setemail(text)
+                }}
                 />
             </View>
             <View style={styles.box_type}>
@@ -68,8 +109,12 @@ export default function Login({navigation}) {
                 <Text style={styles.label}>Password</Text>
                 <View style={{flexDirection:'row',borderWidth:1,height:'100%',alignItems:'center',padding:5,justifyContent:'space-between'}}>
                     <TextInput
+                    value={password}
                     secureTextEntry={showPassword?false:true}
                     placeholder='Enter your password'
+                    onChangeText={(text)=>{
+                        setpassword(text)
+                    }}
                     />
 
                     <MaterialCommunityIcons  
@@ -79,7 +124,7 @@ export default function Login({navigation}) {
                     onPress={()=>{setshowPassword(!showPassword)}}/>
                 </View>
             </View>
-            <TouchableOpacity style={styles.btnLogin}>
+            <TouchableOpacity style={styles.btnLogin} onPress={()=>logIn()}>
                 <Text style={{fontSize:25,fontWeight:700}}>Login</Text>
             </TouchableOpacity>
             
