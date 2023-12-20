@@ -1,9 +1,12 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet,TouchableOpacity } from 'react-native'
 import React, { useContext } from 'react'
 import { AuthContext } from '../Context/AuthContext'
+import AsyncStorage from '@react-native-async-storage/async-storage';  
+
 
 export default function WelcomeHeader() {
-    const {userData,setUserData}=useContext(AuthContext)
+    const {userData,setUserData,setisLogin}=useContext(AuthContext)
+    console.log(userData)
   return (
     <View style={styles.container}>
         <View>
@@ -13,7 +16,14 @@ export default function WelcomeHeader() {
         <Image source={{uri:userData?.picture}}
         style={{width:40,height:40,borderRadius:100}}
         />
-    
+      <TouchableOpacity onPress={()=>{
+        
+        AsyncStorage.removeItem('token')
+        setUserData({})
+        setisLogin(false)
+      }}>
+        <Text>Log out</Text>
+      </TouchableOpacity>
     </View>
   )
 }

@@ -12,12 +12,12 @@ import { ScrollView } from 'react-native'
 import Translate from '../Components/Translate'
 
 
-export default function Home() {
+export default function Home({navigation}) {
     const {userData,setUserData}=useContext(AuthContext)
    
   return (
     <ScrollView style={{padding:20}}>
-        <WelcomeHeader/>
+        <WelcomeHeader />
         <SearchBar/>
         <Translate/>
         <VideoCourseList/>
