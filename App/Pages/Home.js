@@ -6,35 +6,25 @@ import Translate from '../Components/Translate';
 import VideoCourseList from '../Components/VideoCourseList';
 import { AuthContext } from '../Context/AuthContext';
 import VocabLearn from '../Pages/VocabLearn';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+
+const Stack = createNativeStackNavigator();
+
 const Home = ({ navigation }) => {
   const { userData, setUserData } = useContext(AuthContext);
 
-  const navigateToVocabLearn = () => {
-    navigation.navigate('VocabLearn'); 
-  };
-  const navigateToViewVocab = () => {
-    navigation.navigate('ViewVocab'); 
-  };
   return (
     <ScrollView style={{ padding: 20 }}>
       <WelcomeHeader />
       <SearchBar />
       <Translate />
-      <VideoCourseList />
-      <View style={{ height: 100 }}>
-        {/* Nút để đi đến trang VocabLearn */}
-        <Button title="Learn Vocabulary" onPress={navigateToVocabLearn} />
-      </View>
-      <View style={{ height: 100 }}>
-        {/* Nút để đi đến trang VocabLearn */}
-        <Button title="View your vocabulary" onPress={navigateToViewVocab} />
-      </View>
     </ScrollView>
+    
   );
 };
 
 const styles = StyleSheet.create({
-  // Thêm các kiểu CSS cần thiết tại đây nếu cần
 });
 
 export default Home;
