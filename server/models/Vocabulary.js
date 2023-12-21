@@ -3,10 +3,11 @@ const mongoose=require('mongoose')
 const wordSchema=new mongoose.Schema({
     id_course:{
         type:String,
+        unique:true,
         required:true
     },
-    word:{
-        type:String,
+    words:{
+        type:Array,
         required:true
     },
 })

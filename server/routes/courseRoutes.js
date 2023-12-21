@@ -4,10 +4,24 @@ const requireToken=require('../middleware/requireToken')
 
 const router=express.Router()
 
-// const User=mongoose.model('User')
+
 const Vocabulary=mongoose.model('Vocabulary')
 
 
+
+//admin chuyen khoa hoc
+router.post('/setcourse',requireToken,async (req,res)=>{
+    const {id_course,words}=req.body
+    let course=await Vocabulary.findOne({id_course})
+    if(!course) {
+        course=new Vocabulary({id_course,words})
+    } else {
+        course.words=words
+    }
+    await course.save()
+
+    res.send('success')
+})
 
 router.get('/getBasicCourse',requireToken,async (req,res)=>{
     // res.send({name:'success!'})
