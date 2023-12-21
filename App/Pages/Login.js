@@ -82,6 +82,9 @@ export default function Login({navigation}) {
                 }
                 setisLogin(true)
               })
+              .catch((e)=>{
+                Alert.alert('Error: ',"Can't connect to server")
+              })
         }
       }
   return (

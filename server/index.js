@@ -6,11 +6,17 @@ const app=express()
 const PORT = 3000
 const { mogoUrl } = require('./keys')
 require('./models/User')
+require('./models/Vocabulary')
+require('./models/Worduser')
 
 const requireToken=require('./middleware/requireToken')
 const authRoutes=require('./routes/authRoutes')
+const courseRoutes=require('./routes/courseRoutes')
+const wordUserRoutes=require('./routes/wordUserRoutes')
 app.use(bodyParser.json())
 app.use(authRoutes)
+app.use(courseRoutes)
+app.use(wordUserRoutes)
 mongoose.connect(mogoUrl,{
     useNewUrlParser:true,
     useUnifiedTopology:true
@@ -25,8 +31,9 @@ mongoose.connection.on('error',(err)=>{
 })
 
 app.get('/',(req,res)=>{
-    res.send({name:'success!'})
+    res.send({name:'success!1'})
 })
+
 
 
 app.post('/',async(req,res)=>{
