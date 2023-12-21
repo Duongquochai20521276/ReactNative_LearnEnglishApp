@@ -36,7 +36,7 @@ export default SignUp=({navigation}) =>{
         } 
         else {
             
-            fetch("http://192.168.2.46:3000/signup",options)
+            fetch("http://192.168.0.179:3000/signup",options)
               .then(res=>res.json())
               .then(async data=>{
                 console.log(data)

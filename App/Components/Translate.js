@@ -19,7 +19,6 @@ const TranslateApp = () => {
   const [translatedText, setTranslatedText] = useState('');
   const [fromLanguage, setFromLanguage] = useState('vi');
   const [toLanguage, setToLanguage] = useState('en');
-
   const handleTranslate = async () => {
     const key = '67dc4e69113042088b819cb01b9d9b8f';
     const endpoint = 'https://api.cognitive.microsofttranslator.com/';

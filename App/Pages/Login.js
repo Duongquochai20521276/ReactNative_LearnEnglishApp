@@ -64,7 +64,7 @@ export default function Login({navigation}) {
         }else if(!validateEmail(email)) {
             Alert.alert('Notification!','The email is incorrect!')
         } else{
-            fetch("http://192.168.2.46:3000/signin",options)
+            fetch("http://192.168.0.179:3000/signin",options)
               .then(res=>res.json())
               .then(async data=>{
                 console.log(data)
@@ -91,7 +91,7 @@ export default function Login({navigation}) {
         
         <View style={styles.container}>
 
-             <Text style={styles.welcomeText}>Welcome to CodeBox</Text>
+             <Text style={styles.welcomeText}>Welcome to Nhom7</Text>
             <View style={styles.box_type}>
                 <Text style={styles.label}>Email</Text>
                 <TextInput
