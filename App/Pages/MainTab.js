@@ -8,6 +8,7 @@ import CourseList from './CourseList';
 import VocabLearn from './VocabLearn';
 import VideoCourseList from '../Components/VideoCourseList';
 import Profile from './Profile';
+import ListTopic from './ListTopic';
 const Tab = createBottomTabNavigator();
 
 const MainTab = () => {
@@ -26,9 +27,9 @@ const MainTab = () => {
             case 'Vocablearn':
               iconName = 'menu';
               break;
-            case 'VideoCourseList':
-              iconName = 'menu';
-              break;
+            // case 'VideoCourseList':
+            //   iconName = 'menu';
+            //   break;
             // Add more cases for other tabs if needed
             default:
               iconName = 'menu';
@@ -39,12 +40,11 @@ const MainTab = () => {
       })}>
       <Tab.Screen name="home" component={Home} />
       <Tab.Screen name="ViewVocab" component={ViewVocab} />
-      <Tab.Screen name="VocabLearn" component={VocabLearn} />
+      <Tab.Screen name="ListTopic" component={ListTopic} />
+
+      {/* <Tab.Screen name="VocabLearn" component={VocabLearn} /> */}
       <Tab.Screen name="VideoCourseList" component={VideoCourseList} />
       <Tab.Screen name="Profile" component={Profile} />
-
-      {/* <Tab.Screen name="CourseList" component={CourseList} /> */}
-      {/* Add more Tab.Screen components for other tabs if needed */}
     </Tab.Navigator>
   );
 };

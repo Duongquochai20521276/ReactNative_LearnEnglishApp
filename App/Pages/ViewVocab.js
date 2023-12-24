@@ -32,8 +32,8 @@ const ViewVocab = () => {
 
   const handleGoBack = () => {
     // Xử lý khi nút quay lại được nhấn
-    navigation.navigate('home');
-  };
+    navigation.goBack();
+    };
 
   return (
     <View style={styles.container}>
