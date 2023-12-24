@@ -9,6 +9,7 @@ import VocabLearn from './VocabLearn';
 import VideoCourseList from '../Components/VideoCourseList';
 import Profile from './Profile';
 import ListTopic from './ListTopic';
+import VocabReview from './VocabReview';
 const Tab = createBottomTabNavigator();
 
 const MainTab = () => {
@@ -42,7 +43,7 @@ const MainTab = () => {
       <Tab.Screen name="ViewVocab" component={ViewVocab} />
       <Tab.Screen name="ListTopic" component={ListTopic} />
 
-      {/* <Tab.Screen name="VocabLearn" component={VocabLearn} /> */}
+      <Tab.Screen name="VocabReview" component={VocabReview} />
       <Tab.Screen name="VideoCourseList" component={VideoCourseList} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
