@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-
+import CourseDetails from '../Pages/CourseDetails';
 export default function VideoCourseList() {
   const navigation = useNavigation();
 
@@ -24,7 +24,7 @@ export default function VideoCourseList() {
   ];
 
   const onPressCourse = (course) => {
-    navigation.navigate('course-detail', {
+    navigation.navigate('CourseDetails', {
       courseData: course,
       courseType: 'video',
     });

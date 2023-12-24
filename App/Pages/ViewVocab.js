@@ -32,7 +32,7 @@ const ViewVocab = () => {
 
   const handleGoBack = () => {
     // Xử lý khi nút quay lại được nhấn
-    navigation.goBack();
+    navigation.navigate('home');
   };
 
   return (
@@ -55,7 +55,7 @@ const ViewVocab = () => {
         )}
       />
       <TouchableOpacity onPress={handleGoBack} style={styles.goBackButton}>
-        <Text style={styles.buttonText}>Quay lại</Text>
+        <Text style={styles.buttonText}>Exit</Text>
       </TouchableOpacity>
     </View>
   );
