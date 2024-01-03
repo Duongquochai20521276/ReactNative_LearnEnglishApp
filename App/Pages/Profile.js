@@ -9,8 +9,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // ];
 
 const Profile = ({navigation}) => {
-  const {userData,setUserData,setisLogin,lists,setlists,settoken}=useContext(AuthContext)
-  const userDatas=[userData]
+  const {userData,setUserData,setisLogin,lists,setlists,settoken,token}=useContext(AuthContext)
+  let userDatas
+  if(token!='000'){
+    userDatas=[userData]
+  }else{
+    userDatas=[{email:'empty',name:'guest'}]
+  }
   console.log(userData)
   return (
     <View style={styles.container}>

@@ -20,9 +20,9 @@ const TranslateApp = () => {
   const [fromLanguage, setFromLanguage] = useState('vi');
   const [toLanguage, setToLanguage] = useState('en');
   const handleTranslate = async () => {
-    const key = '67dc4e69113042088b819cb01b9d9b8f';
+    const key = 'fe7a3af744cd44f3bbb1331e920988c1';
     const endpoint = 'https://api.cognitive.microsofttranslator.com/';
-    const location = 'eastus';
+    const location = 'global';
 
     try {
       const response = await axios.post(

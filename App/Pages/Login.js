@@ -60,9 +60,9 @@ export default function Login({navigation}) {
         };
       function logIn() {
         if(!email||!password) {
-            Alert.alert('Notification!','User name or password is empty!')
+            Alert.alert('Thông báo!','Email và mật khẩu không được để trống!')
         }else if(!validateEmail(email)) {
-            Alert.alert('Notification!','The email is incorrect!')
+            Alert.alert('Thông báo!','Email không hợp lệ!')
         } else{
             fetch(urlApi+"/signin",options)
               .then(res=>res.json())
