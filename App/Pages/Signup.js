@@ -27,12 +27,12 @@ export default SignUp=({navigation}) =>{
 
     const signUp=()=>{
         if(username=='') {
-            Alert.alert('Notification!','User name is invalid!')
+            Alert.alert('Thông báo!','Tên tài khoản không được để trống!')
         } else
         if(password!=confirmpassword) {
-            Alert.alert('Notification!','The confirm password is incorrect!')
+            Alert.alert('Thông báo!','Mật khẩu nhập lại không đúng!')
         } else if(!validateEmail(email)) {
-            Alert.alert('Notification!','The email is incorrect!')
+            Alert.alert('Thông báo!','Email không hợp lệ!')
         } 
         else {
             
@@ -42,13 +42,14 @@ export default SignUp=({navigation}) =>{
                 console.log(data)
                 try{
                     await AsyncStorage.setItem('token',data.token)
-                    Alert.alert('Dang ky thanh cong:','Chuc mung ban da dang ky thanh cong!')
+                    Alert.alert('Đăng ký thành công:','Chúc mừng bạn đã đăng ký thành công!')
                     setUserData({
                         name:username,
                         picture:'https://cdn3d.iconscout.com/3d/premium/thumb/male-customer-call-service-portrait-6760890-5600697.png?f=webp',
                         email:email,
                         id:data.id
                      })
+                     navigation.navigate('Login')
                 } catch (e) {
                     Alert.alert('Loi luu token: ',e.message)
                 }
@@ -61,35 +62,35 @@ export default SignUp=({navigation}) =>{
 
     return(
         <View style={styles.container}>
-            <Text style={styles.Title}>SIGN UP</Text>
+            <Text style={styles.Title}>Đăng ký</Text>
             <View style={styles.box_type}>
                 <Text style={styles.label}>Email</Text>
                 <TextInput
                 style={styles.input}
                 value={email}
-                placeholder='Enter your email'
+                placeholder='Nhập email'
                 keyboardType='email-address'
                 onChangeText={(text)=>{setemail(text)}}
                 />
             </View>
             <View style={styles.box_type}>
-                <Text style={styles.label}>User name</Text>
+                <Text style={styles.label}>Tên tài khoản</Text>
                 <TextInput
                 style={styles.input}
                 value={username}
-                placeholder='Enter your username'
+                placeholder='Nhập tên tài khoản'
                 keyboardType='email-address'
                 onChangeText={(text)=>{setusername(text)}}
                 />
             </View>
             <View style={styles.box_type}>
                 
-                <Text style={styles.label}>Password</Text>
+                <Text style={styles.label}>Mật khẩu</Text>
                 <View style={{flexDirection:'row',borderWidth:1,height:'100%',alignItems:'center',padding:5,justifyContent:'space-between'}}>
                     <TextInput
                     secureTextEntry={showPassword?false:true}
                     value={password}
-                    placeholder='Enter your password'
+                    placeholder='Nhập mật khẩu'
                     onChangeText={(text)=>{setpassword(text)}}
                     />
 
@@ -102,12 +103,12 @@ export default SignUp=({navigation}) =>{
             </View>
             <View style={styles.box_type}>
                 
-                <Text style={styles.label}>Confirm Password</Text>
+                <Text style={styles.label}>Xác nhận mật khẩu</Text>
                 <View style={{flexDirection:'row',borderWidth:1,height:'100%',alignItems:'center',padding:5,justifyContent:'space-between'}}>
                     <TextInput
                     secureTextEntry={showconfirmPassword?false:true}
                     value={confirmpassword}
-                    placeholder='Confirm your password'
+                    placeholder='Nhập lại mật khẩu'
                     onChangeText={(text)=>{setconfirmpassword(text)}}
                     />
 
@@ -119,15 +120,15 @@ export default SignUp=({navigation}) =>{
                 </View>
             </View>
             <TouchableOpacity style={styles.btnLogin} onPress={()=>signUp()}>
-                <Text style={{fontSize:25,fontWeight:700}}>Sign up</Text>
+                <Text style={{fontSize:25,fontWeight:700}}>Đăng ký</Text>
             </TouchableOpacity>
             <View style={{flexDirection:'row',gap:5}}>
                 <Text style={{fontSize:16}}>
-                    Already have an account?
+                    Đã có tài khoản?
                 </Text>
                 <TouchableOpacity onPress={()=>{navigation.navigate('Login')}}>
                     <Text style={{color:'blue',fontSize:16}} >
-                        Login now
+                        Đăng nhập ngay
                     </Text>
                 </TouchableOpacity>
             </View>

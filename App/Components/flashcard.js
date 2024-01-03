@@ -1,20 +1,85 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState , useEffect,useContext} from 'react';
+import { View, Text, StyleSheet, TouchableOpacity , Alert} from 'react-native';
+import { AuthContext } from '../Context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import Search from './Search';
 
-
+ 
 const Flashcard = ({ vocabularyList }) => {
+  const {token,urlApi,ischange,setischange}=useContext(AuthContext)
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  
   const navigation = useNavigation();
 
-  const handleSaveWord = () => {
-    console.log('Word saved:', currentWord);
+  const handleSaveWord = async() => {
+
+
+    let listword
+    let hasDefaultList
+    await fetch(urlApi+"/getlist",{
+      method:'POST',
+      headers:{
+          Authorization:token
+      }})
+      .then(res=>res.json())
+      .then(data=>{
+          hasDefaultList = data.some(item => item.listname === "default");
+          if(hasDefaultList) {
+            listword=data.filter(item=>item.listname==="default")[0].words
+          }else{listword=[]}
+      }) 
+      .catch((err)=>{
+          console.log(err)
+
+      })  
+
+
+
+    console.log('Word saved:', vocabularyList[currentCardIndex]);
+    if(!listword.some(item=>item===vocabularyList[currentCardIndex].word))
+    {
+      listword=[...listword,vocabularyList[currentCardIndex].word,vocabularyList[currentCardIndex].meaning]
+      setUserList('default',listword)
+    }else{
+      Alert.alert('Thông báo','Từ đã được thêm vào danh sách default')
+    }
+    
+    console.log(listword)
+    
   };
 
   const handleDone = () => {
+    setischange(!ischange)
     navigation.goBack();
   };
+
+ 
+
+
+  const setUserList=(a,b)=>{
+    
+    
+      fetch(urlApi+"/setlist",{
+          method:'POST',
+          headers:{
+              Authorization:token,
+              'Content-Type':'application/json'
+          },
+          body:JSON.stringify({
+              listname:a,words:b
+          })
+
+      })
+      .then(res=>res.json())
+      .then(data=>{
+          if(data.success) Alert.alert('Thông báo','Lưu từ vựng thành công')
+      })
+      .catch((err)=>{
+          console.log('loioiiooi')
+          console.log(err)
+      })
+  }
+
 
   const handleNextCard = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % vocabularyList.length);

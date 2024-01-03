@@ -73,7 +73,7 @@ export default function ListWordUser({navigation}) {
 
             })
             .then(res=>res.json())
-            .then(Alert.alert('xoa thanh cong','Ban da xoa thanh cong danh sach '+a))
+            .then(Alert.alert('Xóa thành công','Bạn đã xóa thành công danh sách '+a))
             .catch((err)=>console.log('loi xoa list'))
         }
 
@@ -101,7 +101,7 @@ export default function ListWordUser({navigation}) {
     }
     const createList =()=>{
         if(!namelist)
-        Alert.alert('Vui long nhap ten danh sach')
+        Alert.alert('Vui lòng nhập tên danh sách')
         else {
             setUserList(namelist,[])
             setlists([...lists,{listname:namelist,words:[]}])
@@ -124,27 +124,27 @@ export default function ListWordUser({navigation}) {
                 }}>
                 <View style={{marginTop:200,marginLeft:30,backgroundColor:'gray',width:300,height:220,borderRadius:5,opacity:0.9,alignItems:'center'}}>
                 <View >
-                    <Text style={{fontSize:40}}>Enter name list</Text>
-                    <TextInput style={{borderWidth:1,borderColor:'black',width:200}}
+                    <Text style={{fontSize:30}}>Nhập tên danh sách</Text>
+                    <TextInput style={{borderWidth:1,borderColor:'black',padding:2}}
                                 value={namelist}
                                 onChangeText={(text)=>{setnamelist(text)}}/>
                     <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
                     onPress={()=>{createList()}}>
                         <View>
-                            <Text>Create</Text>
+                            <Text>Lưu</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
                     onPress={()=>{setModalVisible(!modalVisible);
                         setnamelist('')}}>
                         <View>
-                            <Text>Close</Text>
+                            <Text>Đóng</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 </View>
             </Modal>
-            <Text style={{fontSize:20,color:'#78D6C6' }}>You haven't created any list</Text>
+            <Text style={{fontSize:20,color:'#78D6C6' }}>Bạn chưa tạo một danh sách nào!</Text>
             <MaterialCommunityIcons  
                     name='plus-box'
                     size={50} color='#78D6C6' 
@@ -161,21 +161,21 @@ export default function ListWordUser({navigation}) {
                         }}>
                         <View style={{marginTop:200,marginLeft:30,backgroundColor:'gray',width:300,height:220,borderRadius:5,opacity:0.9,alignItems:'center'}}>
                         <View >
-                            <Text style={{fontSize:40,}}>Enter name list</Text>
-                            <TextInput style={{borderWidth:1,borderColor:'black',width:200}}
+                            <Text style={{fontSize:30,}}>Nhập tên danh sách</Text>
+                            <TextInput style={{borderWidth:1,borderColor:'black',padding:2}}
                                         value={namelist}
                                         onChangeText={(text)=>{setnamelist(text)}}/>
                             <TouchableOpacity style={{backgroundColor:'red',alignItems:'center',marginTop:20,height:40,justifyContent:'center'}}
                             onPress={()=>{createList()}}>
                                 <View>
-                                    <Text>Create</Text>
+                                    <Text>Lưu</Text>
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
                             onPress={()=>{setModalVisible(!modalVisible);
                                 setnamelist('')}}>
                                 <View>
-                                    <Text>Close</Text>
+                                    <Text>Đóng</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -194,28 +194,32 @@ export default function ListWordUser({navigation}) {
                         <MaterialCommunityIcons name='folder' size={40} color={'#FF9800'}/>
                         <Text style={{fontSize:30}}>{item.listname}</Text>  
                     </View>
-                    <MaterialCommunityIcons name='delete' size={40} color={'red'} onPress={()=>{
-                        Alert.alert(
-                            'Xác nhận',
-                            'Bạn có chắc chắn muốn thực hiện hành động này?',
-                            [
-                              {
-                                text: 'Hủy',
-                                style: 'cancel',
-                              },
-                              {
-                                text: 'Đồng ý',
-                                onPress: () => {
-                                  // Xử lý khi người dùng đồng ý
-                                  setlists(lists.filter(item1=>item1!=item))
-                        deletelist(item.listname)
+                    <View style={{flexDirection:'row'}}>
+                        <MaterialCommunityIcons name='play' size={40} color={'#525CEB'} onPress={()=>{if(item.words.length!=0){navigation.navigate('VocabReview',{item})}else{Alert.alert('Lỗi','Không thể ôn tập danh sách trống')}}}/>
+                        <MaterialCommunityIcons name='delete' size={40} color={'red'} onPress={()=>{
+                            Alert.alert(
+                                'Xác nhận',
+                                'Bạn có chắc chắn muốn thực hiện hành động này?',
+                                [
+                                {
+                                    text: 'Hủy',
+                                    style: 'cancel',
                                 },
-                              },
-                            ],
-                            { cancelable: false }
-                          );
+                                {
+                                    text: 'Đồng ý',
+                                    onPress: () => {
+                                    // Xử lý khi người dùng đồng ý
+                                    setlists(lists.filter(item1=>item1!=item))
+                            deletelist(item.listname)
+                                    },
+                                },
+                                ],
+                                { cancelable: false }
+                            );
+                            
+                        }}/>
                         
-                    }}/>
+                    </View>
                     
                 </TouchableOpacity>
             )}

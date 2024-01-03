@@ -10,13 +10,13 @@ export default function WelcomeHeader() {
   return (
     <View style={styles.container}>
         <View>
-        <Text>Hello,</Text>
+        <Text>Xin chào,</Text>
          <Text style={{fontSize:20,fontWeight:'bold'}}>{userData?.name}</Text>
         </View>
         <Image source={{uri:userData?.picture}}
         style={{width:40,height:40,borderRadius:100}}
         />
-      <TouchableOpacity onPress={()=>{
+      {/* <TouchableOpacity onPress={()=>{
         
         AsyncStorage.removeItem('token')
         AsyncStorage.removeItem('userdata')
@@ -26,7 +26,7 @@ export default function WelcomeHeader() {
         settoken("")
       }}>
         <Text>Log out</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   )
 }

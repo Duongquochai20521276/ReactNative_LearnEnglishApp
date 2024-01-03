@@ -41,6 +41,9 @@ const MainTab = () => {
             case 'Vocablearn':
               iconName = 'menu';
               break;
+            case 'VocabReview':
+              iconName = 'caret-forward-outline';
+              break;
             // case 'VideoCourseList':
             //   iconName = 'menu';
             //   break;
@@ -53,12 +56,12 @@ const MainTab = () => {
         tabBarActiveTintColor: '#679dda',
         headerShown:false
       })}>
-      <Tab.Screen name="home" component={Home} />
-      <Tab.Screen name="ViewVocab" component={ViewVocab} />
-      <Tab.Screen name="ListTopic" component={ListTopic} />
-      <Tab.Screen name="VocabReview" component={VocabReview} />
-      <Tab.Screen name="VideoCourseList" component={VideoCourseList} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="home" component={Home} options={{title:'Trang chủ'}}/>
+      <Tab.Screen name="ViewVocab" component={ViewVocab} options={{title:'Danh sách'}}/>
+      <Tab.Screen name="ListTopic" component={ListTopic} options={{title:'Chủ đề'}}/>
+      <Tab.Screen name="VocabReview" component={VocabReview} options={{title:'Ôn tập'}}/>
+      {/* <Tab.Screen name="VideoCourseList" component={VideoCourseList} /> */}
+      <Tab.Screen name="Profile" component={Profile} options={{title:'Tài khoản-'}}/>
     </Tab.Navigator>
   );
 };

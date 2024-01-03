@@ -127,14 +127,14 @@ export default function WordofList({route,navigation}) {
                     // Alert.alert('Modal has been closed.');
                     // setModalVisible(!modalVisible);
                 }}>
-                <View style={{marginTop:200,marginLeft:30,backgroundColor:'gray',width:300,height:270,fontSize:20,borderRadius:5,opacity:0.9,alignItems:'center'}}>
+                <View style={{marginTop:200,marginLeft:30,backgroundColor:'gray',width:300,height:290,fontSize:20,borderRadius:5,opacity:0.9,alignItems:'center'}}>
                 <View >
-                    <Text style={{fontSize:30}}>Enter word</Text>
-                    <TextInput style={{borderWidth:1,borderColor:'black',width:200}}
+                    <Text style={{fontSize:30}}>Từ vựng</Text>
+                    <TextInput style={{borderWidth:1,borderColor:'black',padding:2,fontSize:20}}
                                 value={namelist}
                                 onChangeText={(text)=>{setnamelist(text)}}/>
-                    <Text style={{fontSize:30}}>Enter meaning</Text>
-                    <TextInput style={{borderWidth:1,borderColor:'black',width:200,fontSize:20}}
+                    <Text style={{fontSize:30}}>Nghĩa</Text>
+                    <TextInput style={{borderWidth:1,borderColor:'black',padding:2,width:200,fontSize:20}}
                                 value={meaning}
                                 onChangeText={(text)=>{setmeaning(text)}}/>
                     <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
@@ -147,7 +147,7 @@ export default function WordofList({route,navigation}) {
                             setmeaning('')
                     }}>
                         <View>
-                            <Text>Create</Text>
+                            <Text>Lưu</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
@@ -155,13 +155,13 @@ export default function WordofList({route,navigation}) {
                     setnamelist("")
                     setmeaning('')}}>
                         <View>
-                            <Text>Close</Text>
+                            <Text>Đóng</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 </View>
             </Modal>
-            <Text style={{fontSize:20,color:'#78D6C6' }}>You haven't created any word</Text>
+            <Text style={{fontSize:20,color:'#78D6C6' }}>Danh sách trống</Text>
             <MaterialCommunityIcons  
                     name='plus-box'
                     size={50} color='#78D6C6' 
@@ -177,11 +177,11 @@ export default function WordofList({route,navigation}) {
                         }}>
                         <View style={{marginTop:200,marginLeft:30,backgroundColor:'gray',width:300,height:270,borderRadius:5,opacity:0.9,alignItems:'center'}}>
                         <View >
-                            <Text style={{fontSize:30}}>Enter word</Text>
+                            <Text style={{fontSize:30}}>Từ vựng</Text>
                             <TextInput style={{borderWidth:1,borderColor:'black',width:200,fontSize:20}}
                                         value={namelist}
                                         onChangeText={(text)=>{setnamelist(text)}}/>
-                            <Text style={{fontSize:30}}>Enter meaning</Text>
+                            <Text style={{fontSize:30}}>Nghĩa</Text>
                             <TextInput style={{borderWidth:1,borderColor:'black',width:200,fontSize:20}}
                                         value={meaning}
                                         onChangeText={(text)=>{setmeaning(text)}}/>
@@ -192,7 +192,7 @@ export default function WordofList({route,navigation}) {
                             setnamelist("")
                             setmeaning('')}}>
                                 <View>
-                                    <Text>Create</Text>
+                                    <Text>Lưu</Text>
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
@@ -200,7 +200,7 @@ export default function WordofList({route,navigation}) {
                             setnamelist("")
                             setmeaning('')}}>
                                 <View>
-                                    <Text>Close</Text>
+                                    <Text>Đóng</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>

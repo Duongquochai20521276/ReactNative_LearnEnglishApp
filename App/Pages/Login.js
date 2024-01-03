@@ -71,7 +71,7 @@ export default function Login({navigation}) {
                 console.log(data)
                 try{
                     await AsyncStorage.setItem('token',data.token)
-                    Alert.alert('Dang nhap thanh cong:','Chao mung ban quay tro lai!')
+                    Alert.alert('Đăng  nhập thành công:','Chúc mừng bạn đăng nhập thành công!')
                     settoken(data.token)
                     setUserData({
                         name:data.username,
@@ -109,7 +109,7 @@ export default function Login({navigation}) {
                 <TextInput
                 style={styles.input}
                 value={email}
-                placeholder='Enter your email'
+                placeholder='Nhập email của bạn'
                 keyboardType='email-address'
                 onChangeText={(text)=>{
                     setemail(text)
@@ -118,12 +118,12 @@ export default function Login({navigation}) {
             </View>
             <View style={styles.box_type}>
                 
-                <Text style={styles.label}>Password</Text>
+                <Text style={styles.label}>Mật khẩu</Text>
                 <View style={{flexDirection:'row',borderWidth:1,height:'100%',alignItems:'center',padding:5,justifyContent:'space-between'}}>
                     <TextInput
                     value={password}
                     secureTextEntry={showPassword?false:true}
-                    placeholder='Enter your password'
+                    placeholder='Nhập mật khẩu của bạn'
                     onChangeText={(text)=>{
                         setpassword(text)
                     }}
@@ -137,16 +137,16 @@ export default function Login({navigation}) {
                 </View>
             </View>
             <TouchableOpacity style={styles.btnLogin} onPress={()=>logIn()}>
-                <Text style={{fontSize:25,fontWeight:700}}>Login</Text>
+                <Text style={{fontSize:25,fontWeight:700}}>Đăng nhập</Text>
             </TouchableOpacity>
             
             <View style={{flexDirection:'row',gap:5,marginBottom:20}}>
                 <Text style={{fontSize:16}}>
-                    Don't have an account? 
+                    Không có tài khoản? 
                 </Text>
                 <TouchableOpacity onPress={()=>{navigation.navigate('Signup')}}>
                     <Text style={{color:'blue',fontSize:16}} >
-                        Signup now
+                        Đăng ký ngay
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -166,7 +166,7 @@ export default function Login({navigation}) {
                  })
                  setisLogin(true)
             }}>
-            <Text style={{fontSize:20,color:'gray'}}>{'Skip>>'}</Text>
+            <Text style={{fontSize:20,color:'gray'}}>{'Bỏ qua>>'}</Text>
             </TouchableOpacity>
         
         </View>

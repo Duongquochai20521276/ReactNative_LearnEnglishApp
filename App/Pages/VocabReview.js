@@ -1,32 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import Search from '../Components/Search';
-const SchoolVocabulary = [
-  { id: 1, word: 'Book', meaning: 'Sách' },
-  { id: 2, word: 'Pen', meaning: 'Bút' },
-  { id: 3, word: 'Teacher', meaning: 'Giáo viên' },
-  { id: 4, word: 'Student', meaning: 'Học sinh' },
-  { id: 5, word: 'Classroom', meaning: 'Phòng học' },
-  { id: 6, word: 'Board', meaning: 'Bảng (đen)' },
-  { id: 7, word: 'Desk', meaning: 'Bàn học' },
-  { id: 8, word: 'Chair', meaning: 'Ghế' },
-  { id: 9, word: 'Library', meaning: 'Thư viện' },
-  { id: 10, word: 'Notebook', meaning: 'Sổ tay' },
-  { id: 11, word: 'Pencil', meaning: 'Bút chì' },
-  { id: 12, word: 'Study', meaning: 'Học' },
-  { id: 13, word: 'Learn', meaning: 'Học (kiến thức)' },
-  { id: 14, word: 'Homework', meaning: 'Bài tập về nhà' },
-  { id: 15, word: 'Test', meaning: 'Kiểm tra' },
-  { id: 16, word: 'Grade', meaning: 'Điểm số' },
-  { id: 17, word: 'Backpack', meaning: 'Cặp sách' },
-  { id: 18, word: 'Schoolbag', meaning: 'Cặp học sinh' },
-  { id: 19, word: 'Classmate', meaning: 'Bạn học' },
-  { id: 20, word: 'Subject', meaning: 'Môn học' },
+// const SchoolVocabulary = [
+//   { id: 1, word: 'Book', meaning: 'Sách' },
+//   { id: 2, word: 'Pen', meaning: 'Bút' },
+//   { id: 3, word: 'Teacher', meaning: 'Giáo viên' },
+//   { id: 4, word: 'Student', meaning: 'Học sinh' },
+//   { id: 5, word: 'Classroom', meaning: 'Phòng học' },
+//   { id: 6, word: 'Board', meaning: 'Bảng (đen)' },
+//   { id: 7, word: 'Desk', meaning: 'Bàn học' },
+//   { id: 8, word: 'Chair', meaning: 'Ghế' },
+//   { id: 9, word: 'Library', meaning: 'Thư viện' },
+//   { id: 10, word: 'Notebook', meaning: 'Sổ tay' },
+//   { id: 11, word: 'Pencil', meaning: 'Bút chì' },
+//   { id: 12, word: 'Study', meaning: 'Học' },
+//   { id: 13, word: 'Learn', meaning: 'Học (kiến thức)' },
+//   { id: 14, word: 'Homework', meaning: 'Bài tập về nhà' },
+//   { id: 15, word: 'Test', meaning: 'Kiểm tra' },
+//   { id: 16, word: 'Grade', meaning: 'Điểm số' },
+//   { id: 17, word: 'Backpack', meaning: 'Cặp sách' },
+//   { id: 18, word: 'Schoolbag', meaning: 'Cặp học sinh' },
+//   { id: 19, word: 'Classmate', meaning: 'Bạn học' },
+//   { id: 20, word: 'Subject', meaning: 'Môn học' },
+// ];
+let SchoolVocabulary = [
+  {word: 'Book', meaning: 'Sách' },
+  {word: 'Pen', meaning: 'Bút' },
+  {word: 'Teacher', meaning: 'Giáo viên' },
+  {word: 'Student', meaning: 'Học sinh' },
+  {word: 'Classroom', meaning: 'Phòng học' },
+  {word: 'Board', meaning: 'Bảng (đen)' },
+  {word: 'Desk', meaning: 'Bàn học' },
+  {word: 'Chair', meaning: 'Ghế' },
+  {word: 'Library', meaning: 'Thư viện' },
+  {word: 'Notebook', meaning: 'Sổ tay' },
+  {word: 'Pencil', meaning: 'Bút chì' },
+  {word: 'Study', meaning: 'Học' },
+  {word: 'Learn', meaning: 'Học (kiến thức)' },
+  {word: 'Homework', meaning: 'Bài tập về nhà' },
+  {word: 'Test', meaning: 'Kiểm tra' },
+  {word: 'Grade', meaning: 'Điểm số' },
+  {word: 'Backpack', meaning: 'Cặp sách' },
+  {word: 'Schoolbag', meaning: 'Cặp học sinh' },
+  {word: 'Classmate', meaning: 'Bạn học' },
+  {word: 'Subject', meaning: 'Môn học' },
 ];
-
-const VocabReview = () => {
+const VocabReview = ({route,navigation}) => {
+    if(route.params) {
+      if(route.params.item.words.length==0){
+        console.log('Empty')
+      }else {
+        SchoolVocabulary=[]
+        for (let i = 0; i < route.params.item.words.length; i+=2) {
+          SchoolVocabulary=[...SchoolVocabulary,{word:route.params.item.words[i],meaning:route.params.item.words[i+1]}]
+        }
+        console.log(SchoolVocabulary)
+      }
+    }else{ 
+      return <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><Text>Bạn chưa tiến hành ôn tập</Text></View>
+    } 
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [userAnswer, setUserAnswer] = useState('');
+    const [userAnswer, setUserAnswer] = useState(''); 
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [showSearchComponent, setShowSearchComponent] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
@@ -82,6 +116,7 @@ const VocabReview = () => {
         <TextInput
           style={styles.input}
           onChangeText={(text) => setUserAnswer(text)}
+          onBlur={()=>{setUserAnswer('')}}
           value={userAnswer}
           placeholder="Nhập từ tiếng Anh"
         />
@@ -90,7 +125,7 @@ const VocabReview = () => {
           <Button title="Gợi ý" onPress={() => setShowSearchComponent(true)} />
           <Button title="Xem đáp án" onPress={handleShowAnswer} />
         </View>
-        {isCorrect && <Text>Chính xác!</Text>}
+        {isCorrect && <Text style={{color:'green'}}>Chính xác!</Text>}
         {renderSearchComponent()}
       </View>
     );

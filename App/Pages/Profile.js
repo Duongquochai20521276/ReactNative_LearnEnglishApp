@@ -1,25 +1,38 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React , {useContext}from 'react';
+import { View, Text, StyleSheet,Button } from 'react-native';
 import { AuthContext } from '../Context/AuthContext'
+import AsyncStorage from '@react-native-async-storage/async-storage';  
 
-const userData = [
-  { email: 'example@email.com', username: 'example_user', password: '********' },
-  // Thêm thông tin người dùng khác nếu cần
-];
+// const userDatas = [
+//   { email: 'example@email.com', username: 'example_user', password: '********' },
+//   // Thêm thông tin người dùng khác nếu cần
+// ];
 
-const Profile = () => {
+const Profile = ({navigation}) => {
+  const {userData,setUserData,setisLogin,lists,setlists,settoken}=useContext(AuthContext)
+  const userDatas=[userData]
+  console.log(userData)
   return (
     <View style={styles.container}>
-      {userData.map((user, index) => (
+      {userDatas.map((user, index) => (
         <View key={index} style={styles.userContainer}>
           <Text style={styles.label}>Email:</Text>
           <Text style={styles.value}>{user.email}</Text>
 
-          <Text style={styles.label}>Username:</Text>
-          <Text style={styles.value}>{user.username}</Text>
-
-          <Text style={styles.label}>Password:</Text>
-          <Text style={styles.value}>{user.password}</Text>
+          <Text style={styles.label}>Tên tài khoản:</Text>
+          <Text style={styles.value}>{user.name}</Text>
+          <Button
+            onPress={()=>{AsyncStorage.removeItem('token')
+            AsyncStorage.removeItem('userdata')
+            setUserData({})
+            setlists([])
+            setisLogin(false)
+            settoken("")}}
+            title="Đăng xuất"
+            color="#841584"
+            accessibilityLabel="Learn more about this purple button"
+          />  
+          
         </View>
       ))}
     </View>
