@@ -13,7 +13,7 @@ export default function Login({navigation}) {
     WebBrowser.maybeCompleteAuthSession();
     const [accessToken,setAccessToken]=useState();
     const [userInfo,setUserInfo]=useState();
-    const {userData,setUserData,setisLogin}=useContext(AuthContext)
+    const {userData,setUserData,setisLogin,urlApi,settoken}=useContext(AuthContext)
     const [email,setemail]=useState("")
     const[password,setpassword]=useState('')
     // const [request, response, promptAsync] = Google.useAuthRequest({
@@ -64,23 +64,32 @@ export default function Login({navigation}) {
         }else if(!validateEmail(email)) {
             Alert.alert('Notification!','The email is incorrect!')
         } else{
-            fetch("http://192.168.0.179:3000/signin",options)
+            fetch(urlApi+"/signin",options)
               .then(res=>res.json())
               .then(async data=>{
+                console.log('server phan hoi')
                 console.log(data)
                 try{
                     await AsyncStorage.setItem('token',data.token)
                     Alert.alert('Dang nhap thanh cong:','Chao mung ban quay tro lai!')
+                    settoken(data.token)
                     setUserData({
                         name:data.username,
                         picture:'https://cdn3d.iconscout.com/3d/premium/thumb/male-customer-call-service-portrait-6760890-5600697.png?f=webp',
                         email:email,
-                        id:data.id
+                        // id:data.id
                      })
+                     await AsyncStorage.setItem('userdata',JSON.stringify({
+                        name:data.username,
+                        picture:'https://cdn3d.iconscout.com/3d/premium/thumb/male-customer-call-service-portrait-6760890-5600697.png?f=webp',
+                        email:email,
+                        // id:data.id
+                     }))
+                     setisLogin(true)
                 } catch (e) {
                     Alert.alert('Loi luu token: ',e.message)
                 }
-                setisLogin(true)
+                
               })
               .catch((e)=>{
                 Alert.alert('Error: ',"Can't connect to server")

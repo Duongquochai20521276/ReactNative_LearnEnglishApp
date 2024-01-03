@@ -16,7 +16,7 @@ router.post('/signup',async(req,res)=>{
         res.send({token:token,id:user._id})
     }
     catch(err){
-        res.status(422).send(err.message)
+        res.status(422).send({er:err.message})
     }
     
 
@@ -37,15 +37,14 @@ router.post('/signin',async(req,res)=>{
     try{
         
         await user[0].comparePassword(password)
-        const token =jwt.sign({userid:user._id},jwtkey)
-        
+        const token =jwt.sign({userid:user[0]._id},jwtkey)
+        console.log(token)
             res.send({token:token,username:user[0].username})
-        
         // console.log({token:token,username:user})
         
  
     }catch(err){
-            return  res.status(422).send(err)
+            return  res.status(422).send({er:err.message})
     }
 })
 

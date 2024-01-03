@@ -11,7 +11,7 @@ export default SignUp=({navigation}) =>{
     const[password,setpassword]=useState('')
     const[confirmpassword,setconfirmpassword]=useState('')
     const [username,setusername]=useState('')
-    const {settoken,setUserData}=useContext(AuthContext)
+    const {settoken,setUserData,urlApi}=useContext(AuthContext)
     
 
     const options = {
@@ -36,7 +36,7 @@ export default SignUp=({navigation}) =>{
         } 
         else {
             
-            fetch("http://192.168.0.179:3000/signup",options)
+            fetch(urlApi+"/signup",options)
               .then(res=>res.json())
               .then(async data=>{
                 console.log(data)

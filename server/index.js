@@ -36,9 +36,9 @@ app.get('/',(req,res)=>{
 
 
 
-app.post('/',async(req,res)=>{
-    console.log(req.body)   
-    res.send(req.body)
+app.post('/',requireToken,async(req,res)=>{
+    // console.log(req)
+    res.send({hi:'cuscess'})
 })
 
 

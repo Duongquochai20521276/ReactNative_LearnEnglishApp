@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function WelcomeHeader() {
-    const {userData,setUserData,setisLogin}=useContext(AuthContext)
+    const {userData,setUserData,setisLogin,lists,setlists,settoken}=useContext(AuthContext)
     console.log(userData)
   return (
     <View style={styles.container}>
@@ -19,8 +19,11 @@ export default function WelcomeHeader() {
       <TouchableOpacity onPress={()=>{
         
         AsyncStorage.removeItem('token')
+        AsyncStorage.removeItem('userdata')
         setUserData({})
+        setlists([])
         setisLogin(false)
+        settoken("")
       }}>
         <Text>Log out</Text>
       </TouchableOpacity>

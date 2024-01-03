@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import Flashcard from '../Components/Flashcard';
+import Flashcard from '../Components/flashcard.js';
 const VocabLearn = ({ route }) => {
   // Ensure that route and route.params are defined
   if (!route || !route.params) {

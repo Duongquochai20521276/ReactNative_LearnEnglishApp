@@ -1,5 +1,5 @@
 // MainTab.js
-import React from 'react';
+import React,{useContext,useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Home from './Home';
@@ -8,11 +8,24 @@ import CourseList from './CourseList';
 import VocabLearn from './VocabLearn';
 import VideoCourseList from '../Components/VideoCourseList';
 import Profile from './Profile';
+import { AuthContext } from '../Context/AuthContext';
 import ListTopic from './ListTopic';
 import VocabReview from './VocabReview';
+import ListWordUser from './ListWordUser';
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
 const Tab = createBottomTabNavigator();
 
 const MainTab = () => {
+  const {setUserData}=useContext(AuthContext)
+  const getUserData=async() =>{
+    let tmp = await AsyncStorage.getItem('userdata');
+    tmp=JSON.parse(tmp)
+    setUserData(tmp)
+    console.log(tmp)
+  }
+  useEffect(()=>{
+    getUserData()
+  },[])
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -38,11 +51,11 @@ const MainTab = () => {
           return <Icon name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: '#679dda',
+        headerShown:false
       })}>
       <Tab.Screen name="home" component={Home} />
       <Tab.Screen name="ViewVocab" component={ViewVocab} />
       <Tab.Screen name="ListTopic" component={ListTopic} />
-
       <Tab.Screen name="VocabReview" component={VocabReview} />
       <Tab.Screen name="VideoCourseList" component={VideoCourseList} />
       <Tab.Screen name="Profile" component={Profile} />

@@ -11,11 +11,16 @@ import HomeNavigation from './App/Navigations/HomeNavigation';
 export default function App() {
   const [userData, setUserData] = useState();
   const [isLogin, setisLogin] = useState(false);
-
+  // const urlApi="http://192.168.48.59:3000"
+  const urlApi="http://192.168.2.46:3000"
+  const [token,settoken]=useState("")
+  const[lists,setlists]=useState([])
+  const[ischange,setischange]=useState(false)
   useEffect(() => {
     async function loadToken() {
       const tmp = await AsyncStorage.getItem('token');
       console.log(tmp);
+      settoken(tmp) 
       setisLogin(!!tmp); // Set isLogin to true if token exists, false otherwise
     }
     loadToken();
@@ -25,7 +30,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <AuthContext.Provider value={{ userData, setUserData, isLogin, setisLogin }}>
+      <AuthContext.Provider value={{ ischange,setischange,userData, setUserData, isLogin, setisLogin , urlApi,token,settoken,lists,setlists}}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ animation: 'slide_from_bottom' }}>
             {isLogin ? (             

@@ -1,8 +1,10 @@
 // ViewVocab.js
-import React from 'react';
+import React,{useContext} from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import ListWordUser from './ListWordUser';
+import WordofList from './WordofList';
 const vocabularyList = [
   'Hello',
   'World',
@@ -18,46 +20,12 @@ const vocabularyList = [
 
 const ViewVocab = () => {
   const navigation = useNavigation();
-
-  const vocabList = vocabularyList.map((word, index) => ({ id: index.toString(), word }));
-
-  const handleDelete = (id) => {
-    // Xử lý logic xóa từ vựng ở đây
-    console.log(`Xóa từ vựng có id: ${id}`);
-  };
-
-  const handleDetail = (word) => {
-   
-  };
-
-  const handleGoBack = () => {
-    // Xử lý khi nút quay lại được nhấn
-    navigation.goBack();
-    };
-
+  const Stack = createNativeStackNavigator();
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={vocabList}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Text style={styles.word}>{item.word}</Text>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity onPress={() => handleDelete(item.id)} style={styles.button}>
-                <Text style={styles.buttonText}>Xóa</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleDetail(item.word)} style={styles.button}>
-                <Text style={styles.buttonText}>Chi tiết</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-      />
-      <TouchableOpacity onPress={handleGoBack} style={styles.goBackButton}>
-        <Text style={styles.buttonText}>Exit</Text>
-      </TouchableOpacity>
-    </View>
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="ListWordUser">
+        <Stack.Screen  options={{headerShown:true,animation:'fade'}} name="WordofList" component={WordofList} />
+        <Stack.Screen name="ListWordUser" component={ListWordUser} />
+      </Stack.Navigator>
   );
 };
 
