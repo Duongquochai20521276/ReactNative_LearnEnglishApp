@@ -122,19 +122,19 @@ export default function ListWordUser({navigation}) {
                     setModalVisible(!modalVisible);
                     setnamelist('')
                 }}>
-                <View style={{marginTop:200,marginLeft:30,backgroundColor:'gray',width:300,height:220,borderRadius:5,opacity:0.9,alignItems:'center'}}>
+                <View style={{marginTop:200,marginLeft:30,backgroundColor:'#7FC7D9',width:300,height:220,borderRadius:5,opacity:0.9,alignItems:'center'}}>
                 <View >
                     <Text style={{fontSize:30}}>Nhập tên danh sách</Text>
                     <TextInput style={{borderWidth:1,borderColor:'black',padding:2}}
                                 value={namelist}
                                 onChangeText={(text)=>{setnamelist(text)}}/>
-                    <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
+                    <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'#0079FF',borderRadius:10,alignItems:'center',marginTop:20}}
                     onPress={()=>{createList()}}>
                         <View>
                             <Text>Lưu</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
+                    <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'gray',borderRadius:10,alignItems:'center',marginTop:20}}
                     onPress={()=>{setModalVisible(!modalVisible);
                         setnamelist('')}}>
                         <View>
@@ -159,19 +159,19 @@ export default function ListWordUser({navigation}) {
                             setModalVisible(!modalVisible);
                             setnamelist('')
                         }}>
-                        <View style={{marginTop:200,marginLeft:30,backgroundColor:'gray',width:300,height:220,borderRadius:5,opacity:0.9,alignItems:'center'}}>
+                        <View style={{marginTop:200,marginLeft:30,backgroundColor:'#7FC7D9',width:300,height:220,borderRadius:5,opacity:0.9,alignItems:'center'}}>
                         <View >
                             <Text style={{fontSize:30,}}>Nhập tên danh sách</Text>
                             <TextInput style={{borderWidth:1,borderColor:'black',padding:2}}
                                         value={namelist}
                                         onChangeText={(text)=>{setnamelist(text)}}/>
-                            <TouchableOpacity style={{backgroundColor:'red',alignItems:'center',marginTop:20,height:40,justifyContent:'center'}}
+                            <TouchableOpacity style={{backgroundColor:'#0079FF',borderRadius:10,alignItems:'center',marginTop:20,height:40,justifyContent:'center'}}
                             onPress={()=>{createList()}}>
                                 <View>
                                     <Text>Lưu</Text>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
+                            <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'gray',borderRadius:10,alignItems:'center',marginTop:20}}
                             onPress={()=>{setModalVisible(!modalVisible);
                                 setnamelist('')}}>
                                 <View>
@@ -182,14 +182,14 @@ export default function ListWordUser({navigation}) {
                         </View>
                     </Modal>
             <FlatList
-            ListHeaderComponent={<View style={{justifyContent:'center',alignItems:'center',paddingTop:20}}><Text style={{fontSize:40,fontWeight:800}}>List</Text></View>}
+            ListHeaderComponent={<View style={{justifyContent:'center',alignItems:'center',paddingTop:20}}><Text style={{fontSize:40,fontWeight:800}}>Thư mục</Text></View>}
             ListFooterComponent={<View style={{justifyContent:'center',alignItems:'center'}}>
                 <MaterialCommunityIcons name='plus-circle' size={60} color={'blue'} onPress={()=>{setModalVisible(!modalVisible)}}/>
             </View>}
             data={lists}
             keyExtractor={(item,index) => index}
             renderItem={({item})=>(
-                <TouchableOpacity style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:340,borderBottomWidth:2,marginHorizontal:10,padding:1,marginVertical:2}} onPress={()=>navigation.navigate('WordofList',{item})}>
+                <TouchableOpacity style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:340,backgroundColor:'#95E1D3',marginBottom:5,borderRadius:5,marginHorizontal:10,padding:1,marginVertical:2}} onPress={()=>navigation.navigate('WordofList',{item})}>
                     <View style={{flexDirection:'row'}}>
                         <MaterialCommunityIcons name='folder' size={40} color={'#FF9800'}/>
                         <Text style={{fontSize:30}}>{item.listname}</Text>  

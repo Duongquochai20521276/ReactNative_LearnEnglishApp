@@ -127,7 +127,7 @@ export default function WordofList({route,navigation}) {
                     // Alert.alert('Modal has been closed.');
                     // setModalVisible(!modalVisible);
                 }}>
-                <View style={{marginTop:200,marginLeft:30,backgroundColor:'gray',width:300,height:290,fontSize:20,borderRadius:5,opacity:0.9,alignItems:'center'}}>
+                <View style={{marginTop:200,marginLeft:30,backgroundColor:'#7FC7D9',width:300,height:290,fontSize:20,borderRadius:5,opacity:0.9,alignItems:'center'}}>
                 <View >
                     <Text style={{fontSize:30}}>Từ vựng</Text>
                     <TextInput style={{borderWidth:1,borderColor:'black',padding:2,fontSize:20}}
@@ -137,7 +137,7 @@ export default function WordofList({route,navigation}) {
                     <TextInput style={{borderWidth:1,borderColor:'black',padding:2,width:200,fontSize:20}}
                                 value={meaning}
                                 onChangeText={(text)=>{setmeaning(text)}}/>
-                    <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
+                    <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'#0079FF',borderRadius:10,alignItems:'center',marginTop:20}}
                     onPress={()=>{
                         setModalVisible(!modalVisible)
                         setUserList(titlelist,[...lists,namelist,meaning])
@@ -150,7 +150,7 @@ export default function WordofList({route,navigation}) {
                             <Text>Lưu</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
+                    <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'gray',borderRadius:10,alignItems:'center',marginTop:20}}
                     onPress={()=>{setModalVisible(!modalVisible)
                     setnamelist("")
                     setmeaning('')}}>
@@ -175,7 +175,7 @@ export default function WordofList({route,navigation}) {
                             // Alert.alert('Modal has been closed.');
                             setModalVisible(!modalVisible);
                         }}>
-                        <View style={{marginTop:200,marginLeft:30,backgroundColor:'gray',width:300,height:270,borderRadius:5,opacity:0.9,alignItems:'center'}}>
+                        <View style={{marginTop:200,marginLeft:30,backgroundColor:'#7FC7D9',width:300,height:270,borderRadius:5,opacity:0.9,alignItems:'center'}}>
                         <View >
                             <Text style={{fontSize:30}}>Từ vựng</Text>
                             <TextInput style={{borderWidth:1,borderColor:'black',width:200,fontSize:20}}
@@ -185,7 +185,7 @@ export default function WordofList({route,navigation}) {
                             <TextInput style={{borderWidth:1,borderColor:'black',width:200,fontSize:20}}
                                         value={meaning}
                                         onChangeText={(text)=>{setmeaning(text)}}/>
-                            <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
+                            <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'#0079FF',borderRadius:10,alignItems:'center',marginTop:20}}
                             onPress={()=>{setUserList(titlelist,[...lists,namelist,meaning])
                                 setlists([...lists,namelist,meaning])
                                 setModalVisible(!modalVisible)
@@ -195,7 +195,7 @@ export default function WordofList({route,navigation}) {
                                     <Text>Lưu</Text>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'red',alignItems:'center',marginTop:20}}
+                            <TouchableOpacity style={{height:40,justifyContent:'center',backgroundColor:'gray',borderRadius:10,alignItems:'center',marginTop:20}}
                             onPress={()=>{setModalVisible(!modalVisible)
                             setnamelist("")
                             setmeaning('')}}>
@@ -207,15 +207,15 @@ export default function WordofList({route,navigation}) {
                         </View>
                     </Modal>
             <FlatList
-            ListHeaderComponent={<View style={{justifyContent:'center',alignItems:'center',paddingTop:20}}><Text style={{fontSize:40,fontWeight:800}}></Text></View>}
+            ListHeaderComponent={<View style={{justifyContent:'center',alignItems:'center',paddingTop:0}}><Text style={{fontSize:40,fontWeight:800}}></Text></View>}
             ListFooterComponent={<View style={{justifyContent:'center',alignItems:'center'}}>
                 <MaterialCommunityIcons name='plus-circle' size={60} color={'blue'} onPress={()=>{setModalVisible(!modalVisible)}}/>
             </View>}
             data={lists}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item,index})=>(
-                index%2==0?<TouchableOpacity onPress={()=>{Alert.alert('Nghĩa:',lists[index+1])}} style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:340,borderBottomWidth:2,marginHorizontal:10,padding:1,marginVertical:2}}>
-                <View style={{flexDirection:'row',alignItems:'center'}}>
+                index%2==0?<TouchableOpacity onPress={()=>{Alert.alert('Nghĩa:',lists[index+1])}} style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:340,backgroundColor:'#95E1D3',marginBottom:5,borderRadius:5,marginHorizontal:10,padding:1,marginVertical:2}}>
+                <View style={{flexDirection:'row',alignItems:'center',}}>
                     <MaterialCommunityIcons name='minus' size={20}/>
                     <Text style={{fontSize:30}}>{item}</Text>  
                 </View>

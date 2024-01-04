@@ -122,10 +122,10 @@ const VocabReview = ({route,navigation}) => {
         />
         <View style={styles.button}>
           <Button title="Kiểm tra" onPress={handleCheckAnswer} />
-          <Button title="Gợi ý" onPress={() => setShowSearchComponent(true)} />
+          <Button title="Gợi ý" onPress={() => setShowSearchComponent(!showSearchComponent)} />
           <Button title="Xem đáp án" onPress={handleShowAnswer} />
         </View>
-        {isCorrect && <Text style={{color:'green'}}>Chính xác!</Text>}
+        {isCorrect && <Text style={{color:'green',fontSize:20}}>Chính xác!</Text>}
         {renderSearchComponent()}
       </View>
     );
@@ -143,9 +143,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   meaning: {
-    fontSize: 24,
+    fontSize: 50,
+    color:'white',
+    borderRadius:5,
     fontWeight: 'bold',
     marginBottom: 20,
+    backgroundColor:'#118DF0',
+    width:'90%',
+    height:100,
+    textAlign:'center',
+    textAlignVertical:'center'
   },
   input: {
     height: 40,

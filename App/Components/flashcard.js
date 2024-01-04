@@ -104,13 +104,13 @@ const Flashcard = ({ vocabularyList }) => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={[styles.button, { marginRight: 5 }]} onPress={handlePrevCard}>
-          <Text style={styles.buttonText}>Previous</Text>
+          <Text style={styles.buttonText}>Trước</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, { marginRight: 5 }]} onPress={handleNextCard}>
-          <Text style={styles.buttonText}>Next</Text>
+          <Text style={styles.buttonText}>Sau</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, { backgroundColor: '#27ae60', marginLeft: 5 }]} onPress={handleDone}>
-          <Text style={styles.buttonText}>Done</Text>
+          <Text style={styles.buttonText}>Trở lại</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 5,
     width: 100,
+    alignItems:'center'
   },
   buttonText: {
     color: 'white',

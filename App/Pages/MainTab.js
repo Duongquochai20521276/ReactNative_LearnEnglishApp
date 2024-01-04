@@ -38,7 +38,7 @@ const MainTab = () => {
             case 'ViewVocab':
               iconName = 'book';
               break;
-            case 'Vocablearn':
+            case 'ListTopic':
               iconName = 'menu';
               break;
             case 'VocabReview':
@@ -49,7 +49,7 @@ const MainTab = () => {
             //   break;
             // Add more cases for other tabs if needed
             default:
-              iconName = 'menu';
+              iconName = 'person';
           }
           return <Icon name={iconName} size={size} color={color} />;
         },
@@ -61,7 +61,7 @@ const MainTab = () => {
       <Tab.Screen name="ListTopic" component={ListTopic} options={{title:'Chủ đề'}}/>
       <Tab.Screen name="VocabReview" component={VocabReview} options={{title:'Ôn tập'}}/>
       {/* <Tab.Screen name="VideoCourseList" component={VideoCourseList} /> */}
-      <Tab.Screen name="Profile" component={Profile} options={{title:'Tài khoản-'}}/>
+      <Tab.Screen name="Profile" component={Profile} options={{title:'Tài khoản'}}/>
     </Tab.Navigator>
   );
 };

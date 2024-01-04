@@ -23,7 +23,7 @@ const ListTopic = () => {
           style={styles.courseButton}
           onPress={() => navigateToVocabLearn(course.name)}
         >
-          <Text>{course.name}</Text>
+          <Text style={{fontSize:30}}>{course.name}</Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -39,8 +39,12 @@ const styles = StyleSheet.create({
   courseButton: {
     padding: 10,
     margin: 5,
-    borderWidth: 1,
+    marginVertical:10,
+    // borderWidth: 1,
     borderRadius: 5,
+    width:'90%',
+    alignItems:'center',
+    backgroundColor:'#3EC1D3'
   },
 });
 

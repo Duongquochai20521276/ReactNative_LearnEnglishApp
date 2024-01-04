@@ -119,12 +119,19 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     paddingHorizontal: 8,
     width: '100%',
+    backgroundColor:'white',
+    borderRadius:5
   },
   languagePicker: {
     height: 40,
     width: '100%', // Điều chỉnh chiều rộng nếu cần thiết
     marginBottom: 16,
     backgroundColor: '', // Đặt màu nền của Picker
+    borderWidth:1,
+    borderColor:'gray',
+    justifyContent:'center',
+    backgroundColor:'white',
+    borderRadius:5
   },
   picker: {
     color: 'blue', // Đặt màu chữ
